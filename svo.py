@@ -145,22 +145,6 @@ def findSVOs(tokens):
                     svos.append((sub.lower_, "!" + v.lower_ if verbNegated or objNegated else v.lower_, obj.lower_))
     return svos
 
-# def getAbuserOntoVictimSVOs(tokens):
-#     maleAbuser = {'he', 'boyfriend', 'bf', 'father', 'dad', 'husband', 'brother', 'man'}
-#     femaleAbuser = {'she', 'girlfriend', 'gf', 'mother', 'mom', 'wife', 'sister', 'woman'}
-#     neutralAbuser = {'pastor', 'abuser', 'offender', 'ex', 'x', 'lover', 'church', 'they'}
-#     victim = {'me', 'sister', 'brother', 'child', 'kid', 'baby', 'friend', 'her', 'him', 'man', 'woman'}
-
-#     svos = findSVOs(tokens)
-#     wnl = WordNetLemmatizer()
-#     passed = []
-#     for s, v, o in svos:
-#         s = wnl.lemmatize(s)
-#         v = "!" + wnl.lemmatize(v[1:], 'v') if v[0] == "!" else wnl.lemmatize(v, 'v')
-#         o = "!" + wnl.lemmatize(o[1:]) if o[0] == "!" else wnl.lemmatize(o)
-#         if s in maleAbuser.union(femaleAbuser).union(neutralAbuser) and o in victim:
-#             passed.append((s, v, o))
-#     return passed
 
 def printDeps(toks):
     for tok in toks:
@@ -168,7 +152,7 @@ def printDeps(toks):
 
 def testSVOs():
     # nlp = English()
-    nlp = spacy.load("en_core_web_sm")
+    # nlp = she pacy.load("en_core_web_sm")
     tok = nlp("making $12 an hour? where am i going to go? i have no other financial assistance available and he certainly won't provide support.")
     svos = findSVOs(tok)
     # printDeps(tok)
@@ -176,11 +160,6 @@ def testSVOs():
     print(svos)
     print('otoyoyoyoyooyoooYOYOY')
 
-    # tok = nlp("I ate pizza")
-    # svos = findSVOs(tok)
-    # # printDeps(tok)
-    # print(svos)
-    # assert set(svos) == {('i', '!have', 'assistance')}
 
     print("-----------------------------------------------")
     tok = nlp("They ate the pizza with anchovies.")
@@ -210,12 +189,6 @@ def testSVOs():
     print(svos)
     assert set(svos) == {('he', '!kill', 'me')}
 
-    #print("--------------------------------------------------")
-    #tok = nlp("he is an evil man that hurt my child and sister")
-    #svos = findSVOs(tok)
-    #printDeps(tok)
-    #print(svos)
-    #assert set(svos) == {('he', 'hurt', 'child'), ('he', 'hurt', 'sister'), ('man', 'hurt', 'child'), ('man', 'hurt', 'sister')}
 
     print("--------------------------------------------------")
     tok = nlp("he told me i would die alone with nothing but my career someday")
@@ -244,13 +217,6 @@ def testSVOs():
     printDeps(tok)
     print(svos)
     assert set(svos) == {('he', 'shot', 'me'), ('brother', 'shot', 'me')}
-
-    # print("--------------------------------------------------")
-    # tok = nlp("he and his brother shot me and my sister")
-    # svos = findSVOs(tok)
-    # printDeps(tok)
-    # print(svos)
-    # assert set(svos) == {('he', 'shot', 'me'), ('he', 'shot', 'sister'), ('brother', 'shot', 'me'), ('brother', 'shot', 'sister')}
 
     print("--------------------------------------------------")
     tok = nlp("the annoying person that was my boyfriend hit me")
@@ -287,13 +253,6 @@ def testSVOs():
     print(svos)
     assert set(svos) == {('boy', 'raced', 'girl'), ('who', 'had', 'hat'), ('hat', '!have', 'spots')}
 
-    # print("--------------------------------------------------")
-    # tok = nlp("he is a nice man that didn't hurt my child and sister")
-    # svos = findSVOs(tok)
-    # printDeps(tok)
-    # print(svos)
-    # assert set(svos) == {('he', 'is', 'man'), ('man', '!hurt', 'child'), ('man', '!hurt', 'sister')}
-
     print("--------------------------------------------------")
     tok = nlp("he didn't spit on me and my child")
     svos = findSVOs(tok)
@@ -309,7 +268,12 @@ def testSVOs():
     
 
 def main():
-    testSVOs()
+    nlp = spacy.load("en_core_web_sm")
+    # testSVOs()
+    inp = input("enter a sentence: ")
+    tok = nlp(inp)
+    svos = findSVOs(tok)
+    print(svos)
 
 if __name__ == "__main__":
     main()

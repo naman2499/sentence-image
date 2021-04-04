@@ -4,10 +4,9 @@ import urllib.request
 # from ImageClassifier import CreateDataAndModel
 from ImageClassifier import Run
 import numpy as np
-df = pd.read_csv("data_new.csv",error_bad_lines=False) 
 
-os.chdir('/home/naman/Desktop/image/')
-
+# df = pd.read_csv("data.csv",error_bad_lines=False) 
+# os.chdir('/home/naman/Desktop/image/')
 # for url in df['img_url']:
 #     klass = url.split('/')[4]
 #     print(klass)    

@@ -1,6 +1,7 @@
 import spacy
 import pandas as pd
 from image_extract import *
+from tqdm import tqdm
 ## references && labels
 ## pos https://universaldependencies.org/docs/u/pos/
 ## dep https://github.com/clir/clearnlp-guidelines/blob/master/md/specifications/dependency_labels.md
@@ -33,18 +34,15 @@ df = pd.read_csv("data.csv",error_bad_lines=False)
 yoyo = df.columns.values.tolist()
 yoyo.pop(0)
 
-def match_sen(obj_inp= [], action_inp= [], scene_inp= []):
-    for i in range(0,1000):
+def match_sen(obj_inp, action_inp, scene_inp,option):
+    for i in tqdm(range(0,1000)):
         for yo in yoyo:
             # print(sen_to_space(df[yo][i]))
             obj, action, scene = sen_to_space(df[yo][i])
             # print(obj, action, scene)
-            if (action_inp != [] or scene_inp !=[] ):
+            if (option == 's'):
                 if  (any(x==y for x in obj for y in obj_inp) and any(a == b for a in action for b in action_inp)) and any(p == q for p in scene for q in scene_inp) :
-                    print('yoyoyoyoyoyooy')
                     show_url(df['img_url'][i])
-                else:
-                    print('wtf*********************')
             else:
                 if  (any(x==y for x in obj for y in obj_inp)):
                     print(df[yo][i])
