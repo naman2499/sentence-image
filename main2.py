@@ -9,7 +9,7 @@ option = input("Input 's' for sentence, 'i' for image: ")
 if option == 's':
     sent = input('enter a sentence: ')
     obj_inp, action_inp, scene_inp = sen_to_space(sent)
-    print(obj_inp, action_inp, scene_inp)
+    # psrint(obj_inp, action_inp, scene_inp)
     match_sen(obj_inp, action_inp, scene_inp, option)
 
 
