@@ -1,0 +1,8 @@
+opencv_python==4.5.1.48
+numpy==1.19.5
+tqdm==4.59.0
+pandas==1.2.3
+nltk==3.5
+requests==2.23.0
+spacy==3.0.5
+beautifulsoup4==4.9.3
